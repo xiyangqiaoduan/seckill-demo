@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+	 	http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 读入配置属性文件 -->
+    <context:property-placeholder location="classpath:public_system.properties"/>
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="seckill-web" />
+    <!-- 使用zookeeper注册中心发现服务地址 -->
+    <!-- 注册中心地址 -->
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+    <!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 对外服务接口 -->
+    <dubbo:reference interface="com.yangcb.seckill.service.SeckillFacade" id="seckillFacade" />
+
+
+</beans>
