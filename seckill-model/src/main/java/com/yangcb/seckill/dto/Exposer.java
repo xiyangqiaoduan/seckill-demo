@@ -1,10 +1,13 @@
 package com.yangcb.seckill.dto;
+
+import java.io.Serializable;
+
 /**
  * 秒杀地址DTO
  * @author Administrator
  *
  */
-public class Exposer {
+public class Exposer implements Serializable{
 	/**
 	 * 是否开启秒杀
 	 */

@@ -1,5 +1,6 @@
 package com.yangcb.seckill.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author yangcb
  * @create 2017-06-05 14:38
  **/
-public class  ResultModel<T> {
+public class  ResultModel<T> implements Serializable{
 
     //商品列表
     private List<T> list;

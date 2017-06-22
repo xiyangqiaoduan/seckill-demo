@@ -1,6 +1,8 @@
 package com.yangcb.seckill.dto;
 
-public class DataResult<T> {
+import java.io.Serializable;
+
+public class DataResult<T> implements Serializable{
 
 	private boolean success;
 	private T data;

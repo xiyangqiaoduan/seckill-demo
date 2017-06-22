@@ -1,11 +1,13 @@
 package com.yangcb.seckill.dto;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Administrator 封装json 结果
  * @param <T>
  */
-public class SeckillResult<T> {
+public class SeckillResult<T> implements Serializable{
 
 	private boolean success;
 	private T data;
