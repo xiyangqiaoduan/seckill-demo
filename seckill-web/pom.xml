@@ -249,7 +249,77 @@
         <!-- Zookeeper 用于分布式服务管理 end -->
         <!-- dubbo required jars end -->
     </dependencies>
+
     <build>
-        <finalName>seckill-web</finalName>
+        <finalName>seckill-demo</finalName>
+        <resources>
+            <resource>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArguments>
+                        <bootclasspath>
+                            ${java.home}\lib\rt.jar;${java.home}\lib\jce.jar
+                        </bootclasspath>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <!-- copy web 依赖的类库到WEB-INF lib 下 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
+                            <excludeArtifactIds>jsp-api</excludeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
